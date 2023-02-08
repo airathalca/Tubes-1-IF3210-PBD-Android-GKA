@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/whitesmoke"
     tools:context=".ui.shoppingCart.ShoppingCartFragment">
-
     <TextView
         android:id="@+id/text_shopping_cart"
         android:layout_width="match_parent"
