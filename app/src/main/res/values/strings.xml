@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">majika-app</string>
+    <string name="app_name">majika</string>
+    <string name="navbar_twibbon">Twibbon</string>
+    <string name="navbar_location">Location</string>
+    <string name="navbar_food_bank">Food Bank</string>
+    <string name="navbar_shopping_cart">Shopping Cart</string>
 </resources>

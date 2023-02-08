@@ -1,4 +1,4 @@
-package com.example.majika_app
+package com.example.majika
 
 import org.junit.Test
 
