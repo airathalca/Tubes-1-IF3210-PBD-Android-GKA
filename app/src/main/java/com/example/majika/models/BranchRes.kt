@@ -11,6 +11,6 @@ data class BranchData (
 )
 
 data class BranchRes (
-    val data: List<BranchData>,
+    val data: ArrayList<BranchData>,
     val size: Int,
 )

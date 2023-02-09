@@ -4,20 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.majika.databinding.FragmentLocationBinding
-import com.example.majika.models.BranchData
 import com.example.majika.repository.Repository
 
 class LocationFragment : Fragment() {
 
     private var _binding: FragmentLocationBinding? = null
 
+    private val branchAdapter by lazy { BranchAdapter() }
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -31,18 +29,17 @@ class LocationFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val repository = Repository()
         val viewModelFactory = LocationViewModelFactory(repository)
         val locationViewModel =
-            ViewModelProvider(this, viewModelFactory).get(LocationViewModel::class.java)
+            ViewModelProvider(this, viewModelFactory)[LocationViewModel::class.java]
         locationViewModel.getBranches()
-        locationViewModel.branchRes.observe(this, Observer { response ->
+        locationViewModel.branchRes.observe(viewLifecycleOwner, Observer { response ->
             if (response.isSuccessful) {
                 response.body()?.data.let {
                     if (it != null) {
-                        val branchAdapter = BranchAdapter()
-                        branchAdapter.setData(it as ArrayList<BranchData>)
+                        branchAdapter.setData(it)
                     }
                 }
             }
@@ -54,8 +51,8 @@ class LocationFragment : Fragment() {
         return root
     }    
     private fun setupRecyclerView() {
-        binding.branchList.adapter = BranchAdapter()
         binding.branchList.layoutManager = LinearLayoutManager(context)
+        binding.branchList.adapter = branchAdapter
     }
 
     override fun onDestroyView() {
