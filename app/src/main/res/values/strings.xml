@@ -4,4 +4,5 @@
     <string name="navbar_location">Location</string>
     <string name="navbar_food_bank">Food Bank</string>
     <string name="navbar_shopping_cart">Shopping Cart</string>
+    <string name="maps">Maps</string>
 </resources>
