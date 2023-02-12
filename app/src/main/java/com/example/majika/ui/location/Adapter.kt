@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.majika.databinding.BranchCardBinding
-import com.example.majika.models.BranchData
+import com.example.majika.models.Branch
 import kotlinx.android.synthetic.main.branch_card.view.*
 
 
 class BranchAdapter: RecyclerView.Adapter<BranchAdapter.Holder>(){
-    private var branchList = arrayListOf<BranchData>()
+    private var branchList = arrayListOf<Branch>()
     class Holder(val view: View) : RecyclerView.ViewHolder(view)
 
     private lateinit var binding: BranchCardBinding
@@ -39,7 +39,7 @@ class BranchAdapter: RecyclerView.Adapter<BranchAdapter.Holder>(){
         }
     }
 
-    fun showData(newBranchList: ArrayList<BranchData>){
+    fun showData(newBranchList: ArrayList<Branch>){
         var sortedList = newBranchList.sortedWith(compareBy { it.name })
         branchList.clear()
         branchList.addAll(sortedList)
