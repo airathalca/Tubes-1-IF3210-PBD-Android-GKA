@@ -39,7 +39,7 @@ class BranchAdapter: RecyclerView.Adapter<BranchAdapter.Holder>(){
         }
     }
 
-    fun setData(newBranchList: ArrayList<BranchData>){
+    fun showData(newBranchList: ArrayList<BranchData>){
         var sortedList = newBranchList.sortedWith(compareBy { it.name })
         branchList.clear()
         branchList.addAll(sortedList)

@@ -22,7 +22,8 @@ class LocationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
+        binding.branchList.layoutManager = LinearLayoutManager(context)
+        binding.branchList.adapter = branchAdapter
     }
 
     override fun onCreateView(
@@ -39,7 +40,7 @@ class LocationFragment : Fragment() {
             if (response.isSuccessful) {
                 response.body()?.data.let {
                     if (it != null) {
-                        branchAdapter.setData(it)
+                        branchAdapter.showData(it)
                     }
                 }
             }
@@ -49,10 +50,6 @@ class LocationFragment : Fragment() {
         val root: View = binding.root
 
         return root
-    }    
-    private fun setupRecyclerView() {
-        binding.branchList.layoutManager = LinearLayoutManager(context)
-        binding.branchList.adapter = branchAdapter
     }
 
     override fun onDestroyView() {

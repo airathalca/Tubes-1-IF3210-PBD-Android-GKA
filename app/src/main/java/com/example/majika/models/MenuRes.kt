@@ -1,6 +1,6 @@
 package com.example.majika.models
 
-data class MenuResp (
+data class MenuRes (
     val data: List<Menu>,
     val size: Int,
 )
