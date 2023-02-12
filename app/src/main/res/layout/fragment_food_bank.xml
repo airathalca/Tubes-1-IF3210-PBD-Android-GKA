@@ -7,16 +7,16 @@
     android:background="@color/whitesmoke"
     tools:context=".ui.foodBank.FoodBankFragment">
 
-    <TextView
-        android:id="@+id/text_food_bank"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/menu_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textColor="@color/purple_700"
+        android:background="@color/whitesmoke"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,13 +1,21 @@
 package com.example.majika.ui.foodBank
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.majika.models.MenuRes
+import com.example.majika.repository.Repository
+import kotlinx.coroutines.launch
+import retrofit2.Response
 
-class FoodBankViewModel : ViewModel() {
+class FoodBankViewModel(private val repository : Repository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is Food Bank Fragment"
+    val menuRes: MutableLiveData<Response<MenuRes>>  = MutableLiveData()
+
+    fun getMenus(){
+        viewModelScope.launch {
+            val response = repository.getMenus()
+            menuRes.value = response
+        }
     }
-    val text: LiveData<String> = _text
 }

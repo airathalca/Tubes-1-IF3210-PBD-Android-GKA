@@ -6,24 +6,25 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
     <androidx.cardview.widget.CardView
-        android:id="@+id/branch_card_view"
+        android:id="@+id/menu_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="@color/red"
         app:layout_constraintTop_toTopOf="parent"
         app:cardCornerRadius="12dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/branch_name"
+                android:id="@+id/menu_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/inter"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
@@ -31,52 +32,49 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Branch Name" />
+                tools:text="Menu Name" />
 
             <TextView
-                android:id="@+id/branch_address"
+                android:id="@+id/menu_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:fontFamily="@font/inter"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/branch_name"
-                tools:text="Japan Cindi Timur No.33 RT02/RW21 Hanrahan Circumscribe Catamaran Catalan Catalan" />
-
-            <TextView
-                android:id="@+id/branch_contact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:fontFamily="@font/inter"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/branch_address"
-                tools:text="Aira Thalca - 089507646369" />
-
-            <Button
-                android:id="@+id/button_maps"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/shimmer"
                 android:fontFamily="@font/inter"
-                android:padding="8dp"
-                android:text="@string/maps"
-                android:textColor="@color/red"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                android:text="@string/app_name"
+                android:textColor="@color/white"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/branch_contact" />
+                app:layout_constraintTop_toBottomOf="@+id/menu_name"
+                tools:text="Rp. 50.000" />
+
+            <TextView
+                android:id="@+id/menu_sold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/app_name"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/menu_price"
+                tools:text="10rb+ Terjual" />
+
+            <TextView
+                android:id="@+id/menu_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/app_name"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/menu_sold"
+                tools:text="Makanan ini adalah makanan yang enak" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

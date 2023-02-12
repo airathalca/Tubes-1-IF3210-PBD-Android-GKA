@@ -6,13 +6,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitInstance {
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("http://localhost:8000/")
+            .baseUrl("http://192.168.18.8:8000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     val branchInstance: BranchReq by lazy {
         retrofit.create(BranchReq::class.java)
+    }
+
+    val menuInstance: MenuReq by lazy {
+        retrofit.create(MenuReq::class.java)
     }
 
 }
