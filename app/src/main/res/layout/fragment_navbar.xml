@@ -6,51 +6,55 @@
     android:layout_height="70dp"
     android:background="@color/shimmer">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/navigation_twibbon"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:contentDescription="@string/navbar_twibbon"
         android:src="@drawable/camera_alt_24"
+        android:backgroundTint="@color/shimmer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/navigation_location"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:contentDescription="@string/navbar_location"
         android:src="@drawable/location_on_24"
+        android:backgroundTint="@color/shimmer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.234"
+        app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toEndOf="@+id/navigation_twibbon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/navigation_food_bank"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:contentDescription="@string/navbar_food_bank"
         android:src="@drawable/food_bank_24"
+        android:backgroundTint="@color/shimmer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.366"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toEndOf="@+id/navigation_location"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/navigation_shopping_cart"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:contentDescription="@string/navbar_shopping_cart"
         android:src="@drawable/shopping_cart_24"
+        android:backgroundTint="@color/shimmer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.629"
