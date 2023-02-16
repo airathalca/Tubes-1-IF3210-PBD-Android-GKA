@@ -10,4 +10,7 @@
     <color name="whitesmoke">#FFF5F5F5</color>
     <color name="shimmer">#FFF7E1C9</color>
     <color name="red">#FF901C18</color>
+    <color name="colorPrimary">#FFF7E1C9</color>
+    <color name="colorPrimaryDark">#FFC4A38D</color>
+    <color name="colorAccent">#FF901C18</color>
 </resources>
