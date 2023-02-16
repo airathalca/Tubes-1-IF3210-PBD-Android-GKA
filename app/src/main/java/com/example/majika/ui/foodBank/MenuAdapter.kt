@@ -29,6 +29,18 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>(){
         holder.view.menu_price.text = menuList[position].currency.plus(" ").plus(menuList[position].price.toString())
         holder.view.menu_sold.text = menuList[position].sold.toString().plus(" Terjual!")
         holder.view.menu_desc.text = menuList[position].description
+        holder.view.btn_plus.setOnClickListener {
+            holder.view.quantity.visibility = View.VISIBLE
+            holder.view.btn_minus.visibility = View.VISIBLE
+            holder.view.quantity.text = (holder.view.quantity.text.toString().toInt() + 1).toString()
+        }
+        holder.view.btn_minus.setOnClickListener {
+            if (holder.view.quantity.text.toString().toInt() == 1){
+                holder.view.quantity.visibility = View.INVISIBLE
+                holder.view.btn_minus.visibility = View.INVISIBLE
+            }
+            holder.view.quantity.text = (holder.view.quantity.text.toString().toInt() - 1).toString()
+        }
     }
 
     fun showData(newMenuList: ArrayList<Menu>){
