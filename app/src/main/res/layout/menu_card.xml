@@ -13,70 +13,113 @@
         app:cardBackgroundColor="@color/red"
         app:layout_constraintTop_toTopOf="parent"
         app:cardCornerRadius="12dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:baselineAligned="false"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/menu_name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/menu_data"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/inter"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Menu Name" />
+                android:orientation="vertical"
+                android:padding="10dp">
 
-            <TextView
-                android:id="@+id/menu_price"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/menu_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/inter"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Menu Name" />
+
+                <TextView
+                    android:id="@+id/menu_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/inter"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/menu_name"
+                    tools:text="Rp. 50.000" />
+
+                <TextView
+                    android:id="@+id/menu_sold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/inter"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/menu_price"
+                    tools:text="10rb+ Terjual" />
+
+                <TextView
+                    android:id="@+id/menu_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/inter"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/menu_sold"
+                    tools:text="Makanan ini adalah makanan yang enak sekali saya sjkdgas" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/quantity_layout"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/inter"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/menu_name"
-                tools:text="Rp. 50.000" />
+                android:layout_margin="8dp"
+                android:gravity="right"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/menu_sold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/inter"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/menu_price"
-                tools:text="10rb+ Terjual" />
+                <Button
+                    android:id="@+id/btn_minus"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="4dp"
+                    android:text="@string/minus"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/menu_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/inter"
-                android:text="@string/app_name"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/menu_sold"
-                tools:text="Makanan ini adalah makanan yang enak" />
+                <TextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="10"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/btn_plus"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="4dp"
+                    android:text="@string/plus"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
