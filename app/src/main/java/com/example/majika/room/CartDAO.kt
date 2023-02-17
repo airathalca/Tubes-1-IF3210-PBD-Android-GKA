@@ -12,9 +12,9 @@ interface CartDAO {
     fun getAllCart(): LiveData<List<Cart>>
 
     @Query("SELECT * from cart where item = :item")
-    suspend fun getCart(item: String): Cart
+    fun getCart(item: String): Cart
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update()
     suspend fun updateCart(cart: Cart)
 
     @Delete

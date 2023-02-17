@@ -25,6 +25,7 @@ abstract class CartDatabase : RoomDatabase() {
                         "cart_database"
                     )
                     .fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
                     .build()
                     INSTANCE = instance
                 }

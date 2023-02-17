@@ -9,11 +9,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.majika.databinding.FragmentFoodBankBinding
-import com.example.majika.repository.Repository
+import com.example.majika.repository.*
+import com.example.majika.ui.shoppingCart.*
+import com.example.majika.room.* 
 
 class FoodBankFragment : Fragment() {
 
     private var _binding: FragmentFoodBankBinding? = null
+    private lateinit var cartViewModel: ShoppingCartViewModel
 
     private val menuAdapter by lazy { MenuAdapter() }
     // This property is only valid between onCreateView and
@@ -31,6 +34,11 @@ class FoodBankFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val cartDatabase = CartDatabase.getDatabase(requireContext())
+        val cartRepository = CartRepository(cartDatabase)
+        val cartModelFactory = ShoppingCartViewModelFactory(cartRepository)
+        cartViewModel =
+            ViewModelProvider(this, cartModelFactory)[ShoppingCartViewModel::class.java]
         val repository = Repository()
         val viewModelFactory = FoodBankViewModelFactory(repository)
         val foodBankViewModel =
@@ -40,7 +48,7 @@ class FoodBankFragment : Fragment() {
             if (response.isSuccessful) {
                 response.body()?.data.let {
                     if (it != null) {
-                        menuAdapter.showData(it)
+                        menuAdapter.showData(it, cartViewModel)
                     }
                 }
             }
