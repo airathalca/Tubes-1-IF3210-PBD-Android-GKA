@@ -8,4 +8,6 @@
     <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="jumlah">Jumlah</string>
+    <string name="total_harga">Total Harga</string>
+    <string name="checkout">Checkout</string>
 </resources>

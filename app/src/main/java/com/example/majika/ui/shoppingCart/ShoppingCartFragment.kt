@@ -16,6 +16,7 @@ class ShoppingCartFragment : Fragment() {
 
     private var _binding: FragmentShoppingCartBinding? = null
     private lateinit var cartViewModel: ShoppingCartViewModel
+    var totalPrice = 0
 
     private val cartAdapter by lazy { CartAdapter() }
     // This property is only valid between onCreateView and
@@ -33,20 +34,23 @@ class ShoppingCartFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        _binding = FragmentShoppingCartBinding.inflate(inflater, container, false)
         val cartDatabase = CartDatabase.getDatabase(requireContext())
         val cartRepository = CartRepository(cartDatabase)
         val cartModelFactory = ShoppingCartViewModelFactory(cartRepository)
         cartViewModel =
             ViewModelProvider(this, cartModelFactory)[ShoppingCartViewModel::class.java]
-        // get all Cart items
         cartViewModel.listCart.observe(viewLifecycleOwner, Observer { cartList ->
             if (cartList != null) {
-                //change list to ArrayList
                 val cartArray = ArrayList(cartList)
                 cartAdapter.setData(cartArray, cartViewModel)
+                totalPrice = 0
+                for (i in cartArray) {
+                    totalPrice += i.price*i.quantity
+                }
+                binding.totalPrice.text = totalPrice.toString()
             }
         })
-        _binding = FragmentShoppingCartBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         return root
