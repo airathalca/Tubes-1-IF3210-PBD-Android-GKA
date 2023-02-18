@@ -1,23 +1,30 @@
 package com.example.majika.ui.foodBank
 
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.majika.databinding.FragmentFoodBankBinding
-import com.example.majika.repository.*
-import com.example.majika.ui.shoppingCart.*
-import com.example.majika.room.* 
+import com.example.majika.repository.CartRepository
+import com.example.majika.repository.Repository
+import com.example.majika.room.CartDatabase
+import com.example.majika.ui.shoppingCart.ShoppingCartViewModel
+import com.example.majika.ui.shoppingCart.ShoppingCartViewModelFactory
 
-class FoodBankFragment : Fragment() {
+class FoodBankFragment : Fragment(), SensorEventListener {
 
     private var _binding: FragmentFoodBankBinding? = null
     private lateinit var cartViewModel: ShoppingCartViewModel
+    private lateinit var mSensorManager: SensorManager
+    private lateinit var mTempSensor: Sensor
 
     private val menuAdapter by lazy { MenuAdapter() }
     // This property is only valid between onCreateView and
@@ -54,9 +61,16 @@ class FoodBankFragment : Fragment() {
                 }
             }
         })
-
         _binding = FragmentFoodBankBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        mSensorManager = requireActivity().getSystemService(SensorManager::class.java)
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null) {
+            mTempSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
+            mSensorManager.registerListener(this, mTempSensor, SensorManager.SENSOR_DELAY_NORMAL)
+        } else {
+            binding.textTemperature.text = "23°C"
+        }
 
         return root
     }
@@ -64,5 +78,15 @@ class FoodBankFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onSensorChanged(p0: SensorEvent) {
+        if (p0.sensor.type == Sensor.TYPE_AMBIENT_TEMPERATURE) {
+            binding.textTemperature.text = p0.values[0].toString() + "°C"
+        }
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+        // Do nothing
     }
 }
