@@ -19,4 +19,8 @@ object RetrofitInstance {
         retrofit.create(MenuReq::class.java)
     }
 
+    val paymentInstance: PaymentReq by lazy {
+        retrofit.create(PaymentReq::class.java)
+    }
+
 }
