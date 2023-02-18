@@ -60,10 +60,12 @@
                         android:text="Jumlah" />
                     <Button
                         android:id="@+id/minus_cart_button"
+                        android:backgroundTint="@color/shimmer"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginStart="120dp"
-                        android:text="@string/minus"/>
+                        android:text="@string/minus"
+                        android:textColor="@color/red"/>
                     <TextView
                         android:id="@+id/item_quantity"
                         android:layout_width="wrap_content"
@@ -74,9 +76,11 @@
                         android:text="2" />
                     <Button
                         android:id="@+id/plus_cart_button"
+                        android:backgroundTint="@color/shimmer"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:text="@string/plus"/>
+                        android:text="@string/plus"
+                        android:textColor="@color/red"/>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -15,10 +15,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val actionBar = supportActionBar
-        actionBar!!.title = "Daftar Menu"
-        
-
         val fragment = NavBarFragment()
         supportFragmentManager.beginTransaction().replace(R.id.placeholderNavBar, fragment).commit()
     }

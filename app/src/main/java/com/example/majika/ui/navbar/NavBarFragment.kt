@@ -37,28 +37,24 @@ class NavBarFragment : Fragment() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.navigation_twibbon -> {
-                    (activity as AppCompatActivity).supportActionBar?.title = "Twibbon"
                     binding.navigationTwibbon.isSelected = true
                     binding.navigationLocation.isSelected = false
                     binding.navigationFoodBank.isSelected = false
                     binding.navigationShoppingCart.isSelected = false
                 }
                 R.id.navigation_location -> {
-                    (activity as AppCompatActivity).supportActionBar?.title = "Cabang Restoran"
                     binding.navigationTwibbon.isSelected = false
                     binding.navigationLocation.isSelected = true
                     binding.navigationFoodBank.isSelected = false
                     binding.navigationShoppingCart.isSelected = false
                 }
                 R.id.navigation_food_bank -> {
-                    (activity as AppCompatActivity).supportActionBar?.title = "Daftar Menu"
                     binding.navigationTwibbon.isSelected = false
                     binding.navigationLocation.isSelected = false
                     binding.navigationFoodBank.isSelected = true
                     binding.navigationShoppingCart.isSelected = false
                 }
                 R.id.navigation_shopping_cart -> {
-                    (activity as AppCompatActivity).supportActionBar?.title = "Keranjang"
                     binding.navigationTwibbon.isSelected = false
                     binding.navigationLocation.isSelected = false
                     binding.navigationFoodBank.isSelected = false
@@ -68,8 +64,6 @@ class NavBarFragment : Fragment() {
         }
 
         binding.navigationTwibbon.setOnClickListener {
-            (activity as AppCompatActivity).supportActionBar?.title = "Twibbon"
-
             binding.navigationTwibbon.isSelected = true
             binding.navigationLocation.isSelected = false
             binding.navigationFoodBank.isSelected = false
@@ -78,8 +72,6 @@ class NavBarFragment : Fragment() {
         }
 
         binding.navigationLocation.setOnClickListener {
-            (activity as AppCompatActivity).supportActionBar?.title = "Cabang Restoran"
-
             binding.navigationTwibbon.isSelected = false
             binding.navigationLocation.isSelected = true
             binding.navigationFoodBank.isSelected = false
@@ -88,7 +80,6 @@ class NavBarFragment : Fragment() {
         }
 
         binding.navigationFoodBank.setOnClickListener {
-            (activity as AppCompatActivity).supportActionBar?.title = "Daftar Menu"
             binding.navigationTwibbon.isSelected = false
             binding.navigationLocation.isSelected = false
             binding.navigationFoodBank.isSelected = true
@@ -97,8 +88,6 @@ class NavBarFragment : Fragment() {
         }
 
         binding.navigationShoppingCart.setOnClickListener {
-            (activity as AppCompatActivity).supportActionBar?.title = "Keranjang"
-
             binding.navigationTwibbon.isSelected = false
             binding.navigationLocation.isSelected = false
             binding.navigationFoodBank.isSelected = false

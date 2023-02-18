@@ -10,4 +10,8 @@
     <string name="jumlah">Jumlah</string>
     <string name="total_harga">Total Harga</string>
     <string name="checkout">Checkout</string>
+    <string name="menu">Menu</string>
+    <string name="location">Cabang Restoran</string>
+    <string name="cart">Cart</string>
+    <string name="twibbon">Twibbon</string>
 </resources>
