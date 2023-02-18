@@ -21,4 +21,8 @@ class Repository {
     suspend fun getDrinkMenus(): Response<MenuRes> {
         return RetrofitInstance.menuInstance.getDrinkMenu()
     }
+
+    suspend fun doPayment(code: String): Response<PaymentRes> {
+        return RetrofitInstance.paymentInstance.postPayment(code)
+    }
 }
