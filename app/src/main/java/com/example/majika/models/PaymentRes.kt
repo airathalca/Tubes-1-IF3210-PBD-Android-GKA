@@ -1,5 +1,5 @@
 package com.example.majika.models
 
-data class MenuRes (
+data class PaymentRes (
     val status: String,
 )
