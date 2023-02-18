@@ -14,4 +14,5 @@
     <string name="location">Cabang Restoran</string>
     <string name="cart">Cart</string>
     <string name="twibbon">Twibbon</string>
+    <string name="reset">Reset</string>
 </resources>

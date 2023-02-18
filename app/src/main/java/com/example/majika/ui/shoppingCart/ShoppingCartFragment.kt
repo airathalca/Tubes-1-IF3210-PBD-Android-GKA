@@ -1,5 +1,6 @@
 package com.example.majika.ui.shoppingCart
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.majika.PaymentActivity
 import com.example.majika.databinding.FragmentShoppingCartBinding
 import com.example.majika.repository.*
 import com.example.majika.room.*
+import kotlinx.android.synthetic.main.fragment_shopping_cart.*
 
 class ShoppingCartFragment : Fragment() {
 
@@ -27,6 +30,10 @@ class ShoppingCartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.cartList.layoutManager = LinearLayoutManager(context)
         binding.cartList.adapter = cartAdapter
+        checkout_button.setOnClickListener {
+            val intent = Intent(requireContext(), PaymentActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateView(
