@@ -6,14 +6,25 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.view.View
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import com.example.majika.models.MenuRes
+import com.example.majika.models.PaymentRes
+import com.example.majika.repository.Repository
 import com.google.zxing.Result
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_payment.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import me.dm7.barcodescanner.zxing.ZXingScannerView
+import retrofit2.Response
 
 class PaymentActivity : AppCompatActivity(), ZXingScannerView.ResultHandler, View.OnClickListener {
     private lateinit var mScannerView: ZXingScannerView
+    private lateinit var repository: Repository
     private var isCaptured = false
+    private var paymentStatus = false
+    val paymentRes: MutableLiveData<Response<PaymentRes>> = MutableLiveData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,9 +77,30 @@ class PaymentActivity : AppCompatActivity(), ZXingScannerView.ResultHandler, Vie
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    fun doPayment(code: String) = GlobalScope.launch {
+        val response = repository.doPayment(code)
+        paymentRes.value = response
+    }
+
     override fun handleResult(rawResult: Result?) {
         text_view_qr_code_value.text = rawResult?.text
         button_reset.visibility = View.VISIBLE
+        if (rawResult != null) {
+            doPayment(rawResult.text)
+            paymentRes.observe(this, Observer { response ->
+                if (response.isSuccessful) {
+                    response.body()?.status.let {
+                        if (it == "SUCCESS") {
+                            text_view_qr_code_value.text = "Payment success"
+                        } else if (it == "FAILED") {
+
+                        } else {
+
+                        }
+                    }
+                }
+            })
+        }
     }
 
     override fun onClick(view: View?) {
