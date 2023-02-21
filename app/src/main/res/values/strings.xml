@@ -15,4 +15,5 @@
     <string name="cart">Cart</string>
     <string name="twibbon">Twibbon</string>
     <string name="reset">Reset</string>
+    <string name="payment_fragment">payment_fragment</string>
 </resources>

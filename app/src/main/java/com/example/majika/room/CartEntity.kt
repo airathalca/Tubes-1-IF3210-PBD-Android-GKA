@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.example.majika.models.Menu
 
 @Entity(tableName = "cart")
-data class Cart (
+data class CartEntity (
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "item")

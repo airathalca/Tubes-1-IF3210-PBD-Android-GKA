@@ -6,18 +6,18 @@ import androidx.room.*
 @Dao
 interface CartDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCart(cart: Cart)
+    suspend fun insertCart(cart: CartEntity)
 
     @Query("SELECT * FROM cart")
-    fun getAllCart(): LiveData<List<Cart>>
+    fun getAllCart(): LiveData<List<CartEntity>>
 
-    @Query("SELECT * from cart where item = :item")
-    fun getCart(item: String): Cart
+    @Query("SELECT * FROM cart WHERE item = :item")
+    fun getCart(item: String): CartEntity
 
     @Update()
-    suspend fun updateCart(cart: Cart)
+    suspend fun updateCart(cart: CartEntity)
 
     @Delete
-    suspend fun deleteCart(cart: Cart)
+    suspend fun deleteCart(cart: CartEntity)
 
 }

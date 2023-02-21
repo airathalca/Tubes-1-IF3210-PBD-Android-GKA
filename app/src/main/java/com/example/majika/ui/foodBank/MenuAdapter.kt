@@ -7,17 +7,15 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.majika.databinding.MenuCardBinding
 import com.example.majika.models.Menu
-import com.example.majika.room.Cart
+import com.example.majika.room.CartEntity
 import com.example.majika.ui.shoppingCart.ShoppingCartViewModel
 import kotlinx.android.synthetic.main.menu_card.view.*
 
-
 class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>(){
-    private var menuList = arrayListOf<Menu>()
-    private lateinit var viewModel: ShoppingCartViewModel
-
     class Holder(val view: View) : RecyclerView.ViewHolder(view)
 
+    private var menuList = arrayListOf<Menu>()
+    private lateinit var viewModel: ShoppingCartViewModel
     private lateinit var binding: MenuCardBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -45,12 +43,11 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>(){
         })
         holder.view.btn_plus.setOnClickListener {
             val quantityNow = holder.view.quantity.text.toString().toInt() + 1
-            val newCart = Cart(menuList[position].name, menuList[position].price, quantityNow)
+            val newCart = CartEntity(menuList[position].name, menuList[position].price, quantityNow)
             if (holder.view.quantity.text.toString().toInt() == 0) {
                 viewModel.insertCart(newCart)
                 holder.view.btn_minus.visibility = View.VISIBLE
-            }
-            else {
+            } else {
                 viewModel.updateCart(newCart)
             }
             holder.view.quantity.text = quantityNow.toString()
@@ -59,15 +56,15 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>(){
         holder.view.btn_minus.setOnClickListener {
             val quantityNow = holder.view.quantity.text.toString().toInt() - 1
             if (quantityNow == 0) {
-                val newCart = Cart(menuList[position].name, menuList[position].price, 1)
+                val newCart = CartEntity(menuList[position].name, menuList[position].price, 1)
                 viewModel.deleteCart(newCart)
                 holder.view.quantity.visibility = View.INVISIBLE
                 holder.view.btn_minus.visibility = View.INVISIBLE
-            }
-            else {
-                val newCart = Cart(menuList[position].name, menuList[position].price, quantityNow)
+            } else {
+                val newCart = CartEntity(menuList[position].name, menuList[position].price, quantityNow)
                 viewModel.updateCart(newCart)
             }
+
             holder.view.quantity.text = quantityNow.toString()
         }
     }

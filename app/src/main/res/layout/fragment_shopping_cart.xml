@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whitesmoke"
     tools:context=".ui.shoppingCart.ShoppingCartFragment">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -24,6 +26,7 @@
             android:layout_gravity="center">
         </TextView>
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_list"
         android:layout_width="match_parent"
@@ -38,6 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header" />
+
     <LinearLayout
         android:id="@+id/price_container"
         android:layout_width="wrap_content"
@@ -72,6 +76,7 @@
             android:textStyle="bold"
             tools:text="Rp. 50.000" />
     </LinearLayout>
+
     <Button
         android:id="@+id/checkout_button"
         android:layout_width="wrap_content"
@@ -82,5 +87,5 @@
         app:layout_constraintTop_toBottomOf="@+id/cart_list"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/checkout"
-        android:textSize="12dp"/>
+        android:textSize="12sp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

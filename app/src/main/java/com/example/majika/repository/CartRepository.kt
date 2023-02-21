@@ -4,22 +4,17 @@ import androidx.lifecycle.LiveData
 import com.example.majika.room.*
 
 class CartRepository (private val database: CartDatabase) {
+  val listCart: LiveData<List<CartEntity>> = database.cartDAO.getAllCart()
 
-  val listCart: LiveData<List<Cart>> = database.cartDAO.getAllCart()
-
-  suspend fun insertCart(cart: Cart) {
+  suspend fun insertCart(cart: CartEntity) {
     database.cartDAO.insertCart(cart)
   }
 
-  fun getCart(item: String): Cart {
-    return database.cartDAO.getCart(item)
-  }
-
-  suspend fun updateCart(cart: Cart) {
+  suspend fun updateCart(cart: CartEntity) {
     database.cartDAO.updateCart(cart)
   }
 
-  suspend fun deleteCart(cart: Cart) {
+  suspend fun deleteCart(cart: CartEntity) {
     database.cartDAO.deleteCart(cart)
   }
 }

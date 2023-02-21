@@ -20,15 +20,11 @@ import com.example.majika.ui.shoppingCart.ShoppingCartViewModel
 import com.example.majika.ui.shoppingCart.ShoppingCartViewModelFactory
 
 class FoodBankFragment : Fragment(), SensorEventListener {
-
-    private var _binding: FragmentFoodBankBinding? = null
-    private lateinit var cartViewModel: ShoppingCartViewModel
     private lateinit var mSensorManager: SensorManager
     private lateinit var mTempSensor: Sensor
 
     private val menuAdapter by lazy { MenuAdapter() }
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentFoodBankBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,7 +41,7 @@ class FoodBankFragment : Fragment(), SensorEventListener {
         val cartDatabase = CartDatabase.getDatabase(requireContext())
         val cartRepository = CartRepository(cartDatabase)
         val cartModelFactory = ShoppingCartViewModelFactory(cartRepository)
-        cartViewModel =
+        val cartViewModel =
             ViewModelProvider(this, cartModelFactory)[ShoppingCartViewModel::class.java]
         val repository = Repository()
         val viewModelFactory = FoodBankViewModelFactory(repository)

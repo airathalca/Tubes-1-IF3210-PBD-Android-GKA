@@ -1,6 +1,5 @@
 package com.example.majika.ui.location
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,13 +9,10 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class LocationViewModel(private val repository : Repository) : ViewModel() {
+    val branchRes: MutableLiveData<Response<BranchRes>> = MutableLiveData()
 
-    val branchRes: MutableLiveData<Response<BranchRes>>  = MutableLiveData()
-
-    fun getBranches(){
-        viewModelScope.launch {
-            val response = repository.getBranches()
-            branchRes.value = response
-        }
+    fun getBranches() = viewModelScope.launch {
+        val response = repository.getBranches()
+        branchRes.value = response
     }
 }

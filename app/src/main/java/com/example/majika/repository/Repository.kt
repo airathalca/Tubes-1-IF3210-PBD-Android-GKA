@@ -5,7 +5,6 @@ import com.example.majika.models.*
 import com.example.majika.service.RetrofitInstance
 
 class Repository {
-
     suspend fun getBranches(): Response<BranchRes> {
         return RetrofitInstance.branchInstance.getBranch()
     }

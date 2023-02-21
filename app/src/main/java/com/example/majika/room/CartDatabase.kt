@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.Room
 import android.content.Context
 
-@Database(entities = [Cart::class], version = 1)
+@Database(entities = [CartEntity::class], version = 1)
 
 abstract class CartDatabase : RoomDatabase() {
     abstract val cartDAO: CartDAO

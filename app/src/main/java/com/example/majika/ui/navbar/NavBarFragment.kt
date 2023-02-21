@@ -1,20 +1,15 @@
 package com.example.majika.ui.navbar
 
-import android.app.ActionBar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import com.example.majika.MainActivity
 import com.example.majika.databinding.FragmentNavbarBinding
 import com.example.majika.R
 
 class NavBarFragment : Fragment() {
-
     private var _binding: FragmentNavbarBinding? = null
     private val binding get() = _binding!!
 

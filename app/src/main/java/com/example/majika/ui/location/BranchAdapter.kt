@@ -13,9 +13,9 @@ import kotlinx.android.synthetic.main.branch_card.view.*
 
 
 class BranchAdapter: RecyclerView.Adapter<BranchAdapter.Holder>(){
-    private var branchList = arrayListOf<Branch>()
     class Holder(val view: View) : RecyclerView.ViewHolder(view)
 
+    private var branchList = arrayListOf<Branch>()
     private lateinit var binding: BranchCardBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
