@@ -77,14 +77,15 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
         _binding = null
     }
 
-    override fun onStart() {
-        mScannerView.startCamera()
-        super.onStart()
+    override fun onPause() {
+        super.onPause()
+        mScannerView.stopCamera()
     }
 
-    override fun onPause() {
-        mScannerView.stopCamera()
-        super.onPause()
+    override fun onResume() {
+        super.onResume()
+        mScannerView.startCamera()
+        mScannerView.setResultHandler(this)
     }
 
     private fun initScannerView() {
@@ -130,6 +131,7 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
                     val body = response.body()
                     body?.status.let {
                         text_view_qr_code_value.text = "Payment failed"
+                        mScannerView.resumeCameraPreview(this);
                     }
                 }
             }
