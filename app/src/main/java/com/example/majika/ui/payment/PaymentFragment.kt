@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.majika.MainActivity
 import com.example.majika.databinding.FragmentPaymentBinding
 import com.example.majika.repository.CartRepository
@@ -20,7 +19,6 @@ import com.example.majika.ui.shoppingCart.CartAdapter
 import com.example.majika.ui.shoppingCart.ShoppingCartViewModel
 import com.example.majika.ui.shoppingCart.ShoppingCartViewModelFactory
 import kotlinx.android.synthetic.main.fragment_payment.*
-import kotlinx.coroutines.launch
 import com.google.zxing.Result
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
@@ -120,14 +118,12 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
                 if (response.isSuccessful) {
                     val body = response.body()
                     body?.status.let {
-                        when (it) {
-                            "SUCCESS" -> {
-                                text_view_qr_code_value.text = "Payment success"
-                            }
-                            "FAILED" -> {
-                                text_view_qr_code_value.text = "Payment failed"
-                            }
-                        }
+                        text_view_qr_code_value.text = "Payment success"
+                    }
+                } else {
+                    val body = response.body()
+                    body?.status.let {
+                        text_view_qr_code_value.text = "Payment failed"
                     }
                 }
             }

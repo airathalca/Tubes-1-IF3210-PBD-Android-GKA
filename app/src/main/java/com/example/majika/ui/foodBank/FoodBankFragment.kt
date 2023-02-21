@@ -78,7 +78,7 @@ class FoodBankFragment : Fragment(), SensorEventListener {
 
     override fun onSensorChanged(p0: SensorEvent) {
         if (p0.sensor.type == Sensor.TYPE_AMBIENT_TEMPERATURE) {
-            binding.textTemperature.text = p0.values[0].toString() + "°C"
+            binding.textTemperature.text = String.format("%.1f°C", p0.values[0])
         }
     }
 
