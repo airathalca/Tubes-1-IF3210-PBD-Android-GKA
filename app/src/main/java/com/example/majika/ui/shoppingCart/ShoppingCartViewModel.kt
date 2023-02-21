@@ -21,4 +21,8 @@ class ShoppingCartViewModel(private val repository : CartRepository) : ViewModel
     fun deleteCart(cart: CartEntity) = viewModelScope.launch {
         repository.deleteCart(cart)
     }
+
+    fun deleteAllCart() = viewModelScope.launch {
+        repository.deleteAllCart()
+    }
 }

@@ -6,7 +6,6 @@ import androidx.room.Room
 import android.content.Context
 
 @Database(entities = [CartEntity::class], version = 1)
-
 abstract class CartDatabase : RoomDatabase() {
     abstract val cartDAO: CartDAO
 
@@ -29,6 +28,7 @@ abstract class CartDatabase : RoomDatabase() {
                     .build()
                     INSTANCE = instance
                 }
+
                 return instance
             }
         }

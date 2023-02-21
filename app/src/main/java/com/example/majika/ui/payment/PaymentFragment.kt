@@ -3,7 +3,8 @@ package com.example.majika.ui.payment
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
     private lateinit var mScannerView: ZXingScannerView
     private lateinit var paymentViewModel: PaymentViewModel
+    private lateinit var cartViewModel: ShoppingCartViewModel
 
     private var _binding: FragmentPaymentBinding? = null
     private val binding get() = _binding!!
@@ -47,7 +49,7 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
         val cartDatabase = CartDatabase.getDatabase(requireContext())
         val cartRepository = CartRepository(cartDatabase)
         val cartModelFactory = ShoppingCartViewModelFactory(cartRepository)
-        val cartViewModel =
+        cartViewModel =
             ViewModelProvider(this, cartModelFactory)[ShoppingCartViewModel::class.java]
 
         cartViewModel.listCart.observe(viewLifecycleOwner) { cartList ->
@@ -112,16 +114,22 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
     override fun handleResult(rawResult: Result?) {
         if (rawResult != null) {
             paymentViewModel.doPayment(rawResult.text)
-            Log.i("tag", rawResult.text)
-
             paymentViewModel.paymentRes.observe(viewLifecycleOwner) { response ->
                 if (response.isSuccessful) {
                     val body = response.body()
                     body?.status.let {
-                        if (it == "SUCCESS")
-                            text_view_qr_code_value.text = "Payment success"
-                        else
-                            text_view_qr_code_value.text = "Payment failed"
+                        text_view_qr_code_value.text = "Payment success"
+                        cartViewModel.deleteAllCart()
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            val intent = Intent(requireContext(), MainActivity::class.java)
+                            startActivity(intent)
+                        }, 5000)
+                    }
+                } else {
+                    val body = response.body()
+                    body?.status.let {
+                        text_view_qr_code_value.text = "Payment failed"
                     }
                 }
             }
