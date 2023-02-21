@@ -118,12 +118,10 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
                 if (response.isSuccessful) {
                     val body = response.body()
                     body?.status.let {
-                        text_view_qr_code_value.text = "Payment success"
-                    }
-                } else {
-                    val body = response.body()
-                    body?.status.let {
-                        text_view_qr_code_value.text = "Payment failed"
+                        if (it == "SUCCESS")
+                            text_view_qr_code_value.text = "Payment success"
+                        else
+                            text_view_qr_code_value.text = "Payment failed"
                     }
                 }
             }
