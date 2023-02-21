@@ -35,8 +35,8 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mScannerView = ZXingScannerView(requireContext())
         doRequestPermission()
-        initScannerView()
     }
 
     override fun onCreateView(
@@ -84,16 +84,9 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
 
     override fun onResume() {
         super.onResume()
-        mScannerView.setAutoFocus(true)
         mScannerView.setResultHandler(this)
+        mScannerView.setAutoFocus(true)
         mScannerView.startCamera()
-    }
-
-    private fun initScannerView() {
-        mScannerView = ZXingScannerView(requireContext())
-        mScannerView.setAutoFocus(true)
-        mScannerView.setResultHandler(this)
-        frame_layout_camera.addView(mScannerView)
     }
 
     private fun doRequestPermission() {
@@ -102,7 +95,7 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
         ) { isGranted ->
             if (isGranted) {
                 // Do if the permission is granted
-                initScannerView()
+                frame_layout_camera.addView(mScannerView)
             } else {
                 // Do otherwise
                 val intent = Intent(requireContext(), MainActivity::class.java)
@@ -132,7 +125,7 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
                 val body = response.body()
                 body?.status.let {
                     text_view_qr_code_value.text = "Payment Failed"
-                    mScannerView.resumeCameraPreview(this);
+                    mScannerView.resumeCameraPreview(this)
                 }
             }
         }
