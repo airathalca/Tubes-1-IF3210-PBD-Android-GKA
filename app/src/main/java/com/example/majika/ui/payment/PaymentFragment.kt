@@ -84,8 +84,9 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
 
     override fun onResume() {
         super.onResume()
-        mScannerView.startCamera()
+        mScannerView.setAutoFocus(true)
         mScannerView.setResultHandler(this)
+        mScannerView.startCamera()
     }
 
     private fun initScannerView() {
@@ -112,27 +113,26 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
         permissionLauncher.launch(Manifest.permission.CAMERA)
     }
 
-    override fun handleResult(rawResult: Result?) {
-        if (rawResult != null) {
-            paymentViewModel.doPayment(rawResult.text)
-            paymentViewModel.paymentRes.observe(viewLifecycleOwner) { response ->
-                if (response.isSuccessful) {
-                    val body = response.body()
-                    body?.status.let {
-                        text_view_qr_code_value.text = "Payment success"
+    override fun handleResult(rawResult: Result) {
+        paymentViewModel.doPayment(rawResult.text)
+        paymentViewModel.paymentRes.observe(viewLifecycleOwner) { response ->
+            if (response.isSuccessful) {
+                val body = response.body()
+                body?.status.let {
+                    text_view_qr_code_value.text = "Payment Success"
+
+                    Handler(Looper.getMainLooper()).postDelayed({
                         cartViewModel.deleteAllCart()
 
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            val intent = Intent(requireContext(), MainActivity::class.java)
-                            startActivity(intent)
-                        }, 5000)
-                    }
-                } else {
-                    val body = response.body()
-                    body?.status.let {
-                        text_view_qr_code_value.text = "Payment failed"
-                        mScannerView.resumeCameraPreview(this);
-                    }
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                        startActivity(intent)
+                    }, 5000)
+                }
+            } else {
+                val body = response.body()
+                body?.status.let {
+                    text_view_qr_code_value.text = "Payment Failed"
+                    mScannerView.resumeCameraPreview(this);
                 }
             }
         }
