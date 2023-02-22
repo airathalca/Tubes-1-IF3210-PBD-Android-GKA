@@ -45,8 +45,8 @@ class FoodBankFragment : Fragment(), SensorEventListener {
             ViewModelProvider(this, cartModelFactory)[ShoppingCartViewModel::class.java]
         val repository = Repository()
         val viewModelFactory = FoodBankViewModelFactory(repository)
-        val foodBankViewModel =
-            ViewModelProvider(this, viewModelFactory)[FoodBankViewModel::class.java]
+        val foodBankViewModel = ViewModelProvider(this, viewModelFactory)[FoodBankViewModel::class.java]
+
         foodBankViewModel.getMenus()
         foodBankViewModel.menuRes.observe(viewLifecycleOwner, Observer { response ->
             if (response.isSuccessful) {

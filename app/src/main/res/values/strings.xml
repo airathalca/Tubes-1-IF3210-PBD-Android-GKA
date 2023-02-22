@@ -16,4 +16,5 @@
     <string name="twibbon">Twibbon</string>
     <string name="reset">Reset</string>
     <string name="payment_fragment">payment_fragment</string>
+    <string name="capture">Capture</string>
 </resources>
