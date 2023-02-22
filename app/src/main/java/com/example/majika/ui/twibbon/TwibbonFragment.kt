@@ -38,9 +38,6 @@ class TwibbonFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val twibbonViewModel =
-            ViewModelProvider(this).get(TwibbonViewModel::class.java)
-
         _binding = FragmentTwibbonBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -49,12 +46,7 @@ class TwibbonFragment : Fragment() {
         ) { isGranted ->
             if (isGranted) {
                 // Do if the permission is granted
-                Toast.makeText(requireContext(), "Permission granted", Toast.LENGTH_SHORT).show()
-
                 startCamera()
-            }
-            else {
-                // Do otherwise
             }
         }
 
@@ -106,7 +98,7 @@ class TwibbonFragment : Fragment() {
         }
         startCamera()
     }
-    
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
