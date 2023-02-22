@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.majika.databinding.FragmentTwibbonBinding
+import kotlinx.android.synthetic.main.fragment_twibbon.*
 
 class TwibbonFragment : Fragment() {
 
@@ -29,6 +30,8 @@ class TwibbonFragment : Fragment() {
     private var imageCapture: ImageCapture? = null
 
     private var previewFrozen: Boolean = false
+    private var preview: Preview? = null
+    private var cameraProvider: ProcessCameraProvider? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,21 +63,24 @@ class TwibbonFragment : Fragment() {
         imageCapture = ImageCapture.Builder().build()
 
         binding.button.setOnClickListener {
-//            freezePreview()
+            freezePreview()
         }
         return root
     }
+
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener({
 
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+            cameraProvider = cameraProviderFuture.get()
 
             val preview = Preview.Builder().build().also {
                 mPreview ->
                 if (!previewFrozen) {
                     mPreview.setSurfaceProvider(binding.previewView.surfaceProvider)
+                } else {
+                    mPreview.setSurfaceProvider(null)
                 }
             }
 
@@ -83,15 +89,24 @@ class TwibbonFragment : Fragment() {
             val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
 
             try {
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
+                cameraProvider?.unbindAll()
+                cameraProvider?.bindToLifecycle(this, cameraSelector, preview!!)
             } catch (e: Exception) {
                 Log.d("CameraX", "startCamera Failed:", e)
             }
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
-
+    private fun freezePreview() {
+        previewFrozen = !previewFrozen
+        if (!previewFrozen) {
+            button.text = "Capture"
+        } else {
+            button.text = "Retake"
+        }
+        startCamera()
+    }
+    
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
