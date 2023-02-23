@@ -28,6 +28,22 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>(){
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
+        if (position == 0 && menuList[position].type == "Drink") {
+            holder.view.section_name.visibility = View.VISIBLE
+            holder.view.section_name.text = "Menu Minuman"
+        } else if (position == 0 && menuList[position].type == "Food") {
+            holder.view.section_name.visibility = View.VISIBLE
+            holder.view.section_name.text = "Menu Makanan"
+        } else if (menuList[position].type != menuList[position-1].type) {
+            holder.view.section_name.visibility = View.VISIBLE
+            if (menuList[position].type == "Drink") {
+                holder.view.section_name.text = "Menu Minuman"
+            } else if (menuList[position].type == "Food") {
+                holder.view.section_name.text = "Menu Makanan"
+            }
+        } else {
+            holder.view.section_name.visibility = View.GONE
+        }
         holder.view.menu_name.text = menuList[position].name
         holder.view.menu_price.text = menuList[position].currency.plus(" ").plus(menuList[position].price.toString())
         holder.view.menu_sold.text = menuList[position].sold.toString().plus(" Terjual!")

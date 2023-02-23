@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitInstance {
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("http://192.168.0.102:8080")
+            .baseUrl("http://192.168.18.8:8080")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

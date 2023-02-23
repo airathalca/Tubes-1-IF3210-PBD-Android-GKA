@@ -32,24 +32,40 @@ class NavBarFragment : Fragment() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.navigation_twibbon -> {
+                    binding.navigationTwibbonText.visibility = View.VISIBLE
+                    binding.navigationLocationText.visibility = View.GONE
+                    binding.navigationFoodBankText.visibility = View.GONE
+                    binding.navigationShoppingCartText.visibility = View.GONE
                     binding.navigationTwibbon.isSelected = true
                     binding.navigationLocation.isSelected = false
                     binding.navigationFoodBank.isSelected = false
                     binding.navigationShoppingCart.isSelected = false
                 }
                 R.id.navigation_location -> {
+                    binding.navigationTwibbonText.visibility = View.GONE
+                    binding.navigationLocationText.visibility = View.VISIBLE
+                    binding.navigationFoodBankText.visibility = View.GONE
+                    binding.navigationShoppingCartText.visibility = View.GONE
                     binding.navigationTwibbon.isSelected = false
                     binding.navigationLocation.isSelected = true
                     binding.navigationFoodBank.isSelected = false
                     binding.navigationShoppingCart.isSelected = false
                 }
                 R.id.navigation_food_bank -> {
+                    binding.navigationTwibbonText.visibility = View.GONE
+                    binding.navigationLocationText.visibility = View.GONE
+                    binding.navigationFoodBankText.visibility = View.VISIBLE
+                    binding.navigationShoppingCartText.visibility = View.GONE
                     binding.navigationTwibbon.isSelected = false
                     binding.navigationLocation.isSelected = false
                     binding.navigationFoodBank.isSelected = true
                     binding.navigationShoppingCart.isSelected = false
                 }
                 R.id.navigation_shopping_cart -> {
+                    binding.navigationTwibbonText.visibility = View.GONE
+                    binding.navigationLocationText.visibility = View.GONE
+                    binding.navigationFoodBankText.visibility = View.GONE
+                    binding.navigationShoppingCartText.visibility = View.VISIBLE
                     binding.navigationTwibbon.isSelected = false
                     binding.navigationLocation.isSelected = false
                     binding.navigationFoodBank.isSelected = false
@@ -59,6 +75,10 @@ class NavBarFragment : Fragment() {
         }
 
         binding.navigationTwibbon.setOnClickListener {
+            binding.navigationTwibbonText.visibility = View.VISIBLE
+            binding.navigationLocationText.visibility = View.GONE
+            binding.navigationFoodBankText.visibility = View.GONE
+            binding.navigationShoppingCartText.visibility = View.GONE
             binding.navigationTwibbon.isSelected = true
             binding.navigationLocation.isSelected = false
             binding.navigationFoodBank.isSelected = false
@@ -67,6 +87,10 @@ class NavBarFragment : Fragment() {
         }
 
         binding.navigationLocation.setOnClickListener {
+            binding.navigationTwibbonText.visibility = View.GONE
+            binding.navigationLocationText.visibility = View.VISIBLE
+            binding.navigationFoodBankText.visibility = View.GONE
+            binding.navigationShoppingCartText.visibility = View.GONE
             binding.navigationTwibbon.isSelected = false
             binding.navigationLocation.isSelected = true
             binding.navigationFoodBank.isSelected = false
@@ -75,6 +99,10 @@ class NavBarFragment : Fragment() {
         }
 
         binding.navigationFoodBank.setOnClickListener {
+            binding.navigationTwibbonText.visibility = View.GONE
+            binding.navigationLocationText.visibility = View.GONE
+            binding.navigationFoodBankText.visibility = View.VISIBLE
+            binding.navigationShoppingCartText.visibility = View.GONE
             binding.navigationTwibbon.isSelected = false
             binding.navigationLocation.isSelected = false
             binding.navigationFoodBank.isSelected = true
@@ -83,6 +111,10 @@ class NavBarFragment : Fragment() {
         }
 
         binding.navigationShoppingCart.setOnClickListener {
+            binding.navigationTwibbonText.visibility = View.GONE
+            binding.navigationLocationText.visibility = View.GONE
+            binding.navigationFoodBankText.visibility = View.GONE
+            binding.navigationShoppingCartText.visibility = View.VISIBLE
             binding.navigationTwibbon.isSelected = false
             binding.navigationLocation.isSelected = false
             binding.navigationFoodBank.isSelected = false

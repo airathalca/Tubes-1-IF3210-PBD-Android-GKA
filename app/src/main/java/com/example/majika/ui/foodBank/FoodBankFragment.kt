@@ -8,10 +8,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.majika.R
 import com.example.majika.databinding.FragmentFoodBankBinding
 import com.example.majika.repository.CartRepository
 import com.example.majika.repository.Repository
@@ -52,6 +54,8 @@ class FoodBankFragment : Fragment(), SensorEventListener {
             if (response.isSuccessful) {
                 response.body()?.data.let {
                     if (it != null) {
+                        // sort by type descending
+                        it.sortByDescending { it.type }
                         menuAdapter.showData(it, cartViewModel)
                     }
                 }
@@ -78,7 +82,9 @@ class FoodBankFragment : Fragment(), SensorEventListener {
 
     override fun onSensorChanged(p0: SensorEvent) {
         if (p0.sensor.type == Sensor.TYPE_AMBIENT_TEMPERATURE) {
-            binding.textTemperature.text = String.format("%.1f°C", p0.values[0])
+            activity?.findViewById<TextView>(
+                R.id.text_temperature)?.text = 
+            "${p0.values[0].toInt()}°C"
         }
     }
 

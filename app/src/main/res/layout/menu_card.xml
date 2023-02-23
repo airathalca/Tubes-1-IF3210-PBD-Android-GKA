@@ -6,13 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/section_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:paddingBottom="10dp"
+        android:fontFamily="@font/inter"
+        android:text="Menu Makanan"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="10dp"
+        tools:visibility="visible" />
     <androidx.cardview.widget.CardView
         android:id="@+id/menu_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="@color/red"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/section_name"
         app:cardCornerRadius="12dp">
         <LinearLayout
             android:baselineAligned="false"
@@ -111,6 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:fontFamily="@font/inter"
                     android:text="0"
                     android:textColor="@color/white"
                     android:textSize="15sp"
