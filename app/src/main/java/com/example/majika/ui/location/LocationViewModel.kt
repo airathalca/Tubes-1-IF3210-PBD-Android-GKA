@@ -12,7 +12,11 @@ class LocationViewModel(private val repository : Repository) : ViewModel() {
     val branchRes: MutableLiveData<Response<BranchRes>> = MutableLiveData()
 
     fun getBranches() = viewModelScope.launch {
-        val response = repository.getBranches()
-        branchRes.value = response
+        try {
+            val response = repository.getBranches()
+            branchRes.value = response
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

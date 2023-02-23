@@ -12,7 +12,12 @@ class PaymentViewModel(private val repository: Repository) : ViewModel() {
     val paymentRes: MutableLiveData<Response<PaymentRes>> = MutableLiveData()
 
     fun doPayment(code: String) = viewModelScope.launch {
-        val response = repository.doPayment(code)
-        paymentRes.value = response
+        try {
+            val response = repository.doPayment(code)
+            paymentRes.value = response
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 }

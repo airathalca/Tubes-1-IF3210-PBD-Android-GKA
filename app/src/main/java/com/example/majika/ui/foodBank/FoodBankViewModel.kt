@@ -12,7 +12,12 @@ class FoodBankViewModel(private val repository : Repository) : ViewModel() {
     val menuRes: MutableLiveData<Response<MenuRes>> = MutableLiveData()
 
     fun getMenus() = viewModelScope.launch {
-        val response = repository.getMenus()
-        menuRes.value = response
+        // try catch block
+        try {
+            val response = repository.getMenus()
+            menuRes.value = response
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
