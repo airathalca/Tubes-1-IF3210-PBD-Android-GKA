@@ -27,9 +27,11 @@ import com.example.majika.ui.shoppingCart.ShoppingCartViewModelFactory
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            // Do nothing
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            // Do nothing
         }
 
         override fun afterTextChanged(editable: Editable?) {
@@ -66,7 +68,8 @@ class FoodBankFragment : Fragment(), SensorEventListener {
 
         val repository = Repository()
         val viewModelFactory = FoodBankViewModelFactory(repository)
-        val foodBankViewModel = ViewModelProvider(this, viewModelFactory)[FoodBankViewModel::class.java]
+        val foodBankViewModel =
+            ViewModelProvider(this, viewModelFactory)[FoodBankViewModel::class.java]
 
         foodBankViewModel.getMenus()
         foodBankViewModel.menuRes.observe(viewLifecycleOwner) { response ->
@@ -96,9 +99,7 @@ class FoodBankFragment : Fragment(), SensorEventListener {
 
         binding.searchLayout.editText?.afterTextChanged { updateData(it) }
 
-        val root: View = binding.root
-
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {
