@@ -1,32 +1,47 @@
 package com.example.majika.ui.foodBank
 
-import android.app.SearchManager
-import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.majika.R
 import com.example.majika.databinding.FragmentFoodBankBinding
+import com.example.majika.models.Menu
 import com.example.majika.repository.CartRepository
 import com.example.majika.repository.Repository
 import com.example.majika.room.CartDatabase
 import com.example.majika.ui.shoppingCart.ShoppingCartViewModel
 import com.example.majika.ui.shoppingCart.ShoppingCartViewModelFactory
-import kotlinx.android.synthetic.main.fragment_food_bank.*
+
+fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(editable: Editable?) {
+            afterTextChanged.invoke(editable.toString())
+        }
+    })
+}
 
 class FoodBankFragment : Fragment(), SensorEventListener {
     private lateinit var mSensorManager: SensorManager
     private lateinit var mTempSensor: Sensor
+    private lateinit var data: ArrayList<Menu>
 
     private val menuAdapter by lazy { MenuAdapter() }
     private var _binding: FragmentFoodBankBinding? = null
@@ -48,6 +63,7 @@ class FoodBankFragment : Fragment(), SensorEventListener {
         val cartModelFactory = ShoppingCartViewModelFactory(cartRepository)
         val cartViewModel =
             ViewModelProvider(this, cartModelFactory)[ShoppingCartViewModel::class.java]
+
         val repository = Repository()
         val viewModelFactory = FoodBankViewModelFactory(repository)
         val foodBankViewModel = ViewModelProvider(this, viewModelFactory)[FoodBankViewModel::class.java]
@@ -56,28 +72,19 @@ class FoodBankFragment : Fragment(), SensorEventListener {
         foodBankViewModel.menuRes.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
                 response.body()?.data.let { it ->
-                    var data = it;
-
-                    if (data != null) {
-                        // filter by query
-                        if (activity?.intent?.action == Intent.ACTION_SEARCH) {
-                            val query = activity?.intent?.getStringExtra(SearchManager.QUERY)
-
-                            if (query != null) {
-                                data = ArrayList(data.filter { it.name.contains(query) })
-                            }
-                        }
-
+                    if (it != null) {
                         // sort by type
-                        data.sortByDescending { it.type }
-                        menuAdapter.showData(data, cartViewModel)
+                        it.sortByDescending { it.type }
+                        menuAdapter.showData(it, cartViewModel)
+
+                        // save it to data
+                        data = it
                     }
                 }
             }
         }
 
         _binding = FragmentFoodBankBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
         mSensorManager = requireActivity().getSystemService(SensorManager::class.java)
         if (mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null) {
@@ -87,9 +94,9 @@ class FoodBankFragment : Fragment(), SensorEventListener {
             binding.textTemperature.text = "0°C"
         }
 
-        binding.searchButton.setOnClickListener {
-            activity?.onSearchRequested()
-        }
+        binding.searchLayout.editText?.afterTextChanged { updateData(it) }
+
+        val root: View = binding.root
 
         return root
     }
@@ -101,12 +108,22 @@ class FoodBankFragment : Fragment(), SensorEventListener {
 
     override fun onSensorChanged(p0: SensorEvent) {
         if (p0.sensor.type == Sensor.TYPE_AMBIENT_TEMPERATURE) {
-            activity?.findViewById<TextView>(
-                R.id.text_temperature)?.text = String.format("%d°C", p0.values[0].toInt())
+            activity?.findViewById<TextView>(R.id.text_temperature)?.text = String.format("%d°C", p0.values[0].toInt())
         }
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
         // Do nothing
+    }
+
+    private fun updateData(query: String) {
+        val cartDatabase = CartDatabase.getDatabase(requireContext())
+        val cartRepository = CartRepository(cartDatabase)
+        val cartModelFactory = ShoppingCartViewModelFactory(cartRepository)
+        val cartViewModel =
+            ViewModelProvider(this, cartModelFactory)[ShoppingCartViewModel::class.java]
+
+        val temp = ArrayList(data.filter { it.name.contains(query, ignoreCase = true) })
+        menuAdapter.showData(temp, cartViewModel)
     }
 }
