@@ -49,7 +49,7 @@ class ShoppingCartFragment : Fragment() {
                 for (i in cartArray) {
                     totalPrice += i.price * i.quantity
                 }
-                binding.totalPrice.text = totalPrice.toString()
+                binding.totalPrice.text = "Rp. ".plus(totalPrice.formatDecimalSeparator())
             }
         }
 
@@ -59,5 +59,13 @@ class ShoppingCartFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun Int.formatDecimalSeparator(): String {
+        return toString()
+            .reversed()
+            .chunked(3)
+            .joinToString(",")
+            .reversed()
     }
 }

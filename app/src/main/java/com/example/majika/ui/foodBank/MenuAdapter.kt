@@ -45,8 +45,8 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>(){
             holder.view.section_name.visibility = View.GONE
         }
         holder.view.menu_name.text = menuList[position].name
-        holder.view.menu_price.text = menuList[position].currency.plus(" ").plus(menuList[position].price.toString())
-        holder.view.menu_sold.text = menuList[position].sold.toString().plus(" Terjual!")
+        holder.view.menu_price.text = menuList[position].currency.plus(" ").plus(menuList[position].price.formatDecimalSeparator())
+        holder.view.menu_sold.text = menuList[position].sold.formatDecimalSeparator().plus(" Terjual!")
         holder.view.menu_desc.text = menuList[position].description
         viewModel.listCart.observeForever(Observer {
             for (i in it) {
@@ -90,5 +90,13 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>(){
         menuList.clear()
         menuList.addAll(newMenuList)
         notifyDataSetChanged()
+    }
+
+    fun Int.formatDecimalSeparator(): String {
+        return toString()
+            .reversed()
+            .chunked(3)
+            .joinToString(",")
+            .reversed()
     }
 }

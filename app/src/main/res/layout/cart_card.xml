@@ -58,13 +58,14 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="0dp"
                         android:layout_weight="1"
+                        android:fontFamily="@font/inter"
+                        android:textSize="15dp"
                         android:text="Jumlah" />
                     <Button
                         android:id="@+id/minus_cart_button"
                         android:backgroundTint="@color/shimmer"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:layout_marginStart="120dp"
                         android:text="@string/minus"
                         android:textColor="@color/red"/>
                     <TextView
@@ -73,6 +74,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
+                        android:fontFamily="@font/inter"
                         android:textAlignment="center"
                         android:text="2" />
                     <Button

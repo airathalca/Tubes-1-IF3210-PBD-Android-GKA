@@ -26,7 +26,7 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.Holder>() {
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.view.cart_name.text = cartList[position].item
-        holder.view.cart_price.text = cartList[position].price.toString()
+        holder.view.cart_price.text = "Rp. ".plus(cartList[position].price.formatDecimalSeparator())
         holder.view.item_quantity.text = cartList[position].quantity.toString()
         holder.view.plus_cart_button.setOnClickListener {
             val quantityNow = holder.view.item_quantity.text.toString().toInt() + 1
@@ -55,6 +55,14 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.Holder>() {
         viewModel = cartViewModel
         cartList = list
         notifyDataSetChanged()
+    }
+
+    private fun Int.formatDecimalSeparator(): String {
+        return toString()
+            .reversed()
+            .chunked(3)
+            .joinToString(",")
+            .reversed()
     }
 
 }
