@@ -17,4 +17,5 @@
     <string name="reset">Reset</string>
     <string name="payment_fragment">payment_fragment</string>
     <string name="capture">Capture</string>
+    <string name="search_menu">Search Menu</string>
 </resources>

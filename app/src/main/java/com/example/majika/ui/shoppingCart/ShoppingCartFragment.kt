@@ -50,7 +50,7 @@ class ShoppingCartFragment : Fragment() {
                 for (i in cartArray) {
                     totalPrice += i.price * i.quantity
                 }
-                binding.totalPrice.text = "Rp. ".plus(totalPrice.formatDecimalSeparator())
+                binding.totalPrice.text = String.format("Rp. %s", totalPrice.formatDecimalSeparator())
                 if (totalPrice == 0) {
                     binding.checkoutButton.visibility = View.GONE
                 } else {

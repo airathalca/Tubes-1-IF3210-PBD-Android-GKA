@@ -6,8 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -15,7 +13,6 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.majika.databinding.FragmentTwibbonBinding
 import kotlinx.android.synthetic.main.fragment_twibbon.*
 
@@ -30,7 +27,6 @@ class TwibbonFragment : Fragment() {
     private var imageCapture: ImageCapture? = null
 
     private var previewFrozen: Boolean = false
-    private var preview: Preview? = null
     private var cameraProvider: ProcessCameraProvider? = null
 
     override fun onCreateView(
@@ -57,6 +53,7 @@ class TwibbonFragment : Fragment() {
         binding.button.setOnClickListener {
             freezePreview()
         }
+
         return root
     }
 

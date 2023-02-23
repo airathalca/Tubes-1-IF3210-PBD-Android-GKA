@@ -30,7 +30,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
@@ -53,7 +52,7 @@
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="374dp"
-            android:src="@drawable/twibon"
+            android:src="@drawable/twibbon"
             android:translationY="58dp" />
 
     </FrameLayout>

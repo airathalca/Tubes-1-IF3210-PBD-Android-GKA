@@ -3,7 +3,6 @@ package com.example.majika.ui.foodBank
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.majika.databinding.MenuCardBinding
 import com.example.majika.models.Menu
@@ -48,7 +47,7 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>(){
         holder.view.menu_price.text = menuList[position].currency.plus(" ").plus(menuList[position].price.formatDecimalSeparator())
         holder.view.menu_sold.text = menuList[position].sold.formatDecimalSeparator().plus(" Terjual!")
         holder.view.menu_desc.text = menuList[position].description
-        viewModel.listCart.observeForever(Observer {
+        viewModel.listCart.observeForever {
             for (i in it) {
                 if (i.item == menuList[position].name) {
                     holder.view.quantity.text = i.quantity.toString()
@@ -56,7 +55,7 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>(){
                     holder.view.btn_minus.visibility = View.VISIBLE
                 }
             }
-        })
+        }
         holder.view.btn_plus.setOnClickListener {
             val quantityNow = holder.view.quantity.text.toString().toInt() + 1
             val newCart = CartEntity(menuList[position].name, menuList[position].price, quantityNow)
