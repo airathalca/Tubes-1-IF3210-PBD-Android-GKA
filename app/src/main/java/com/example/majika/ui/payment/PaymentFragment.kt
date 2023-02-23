@@ -63,7 +63,7 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
                     totalPrice += i.price * i.quantity
                 }
 
-                binding.paymentPrice.text = String.format("Total Payment: Rp.%,d", totalPrice)
+                binding.paymentPrice.text = String.format("Rp. %s", totalPrice.formatDecimalSeparator())
             }
         }
 
@@ -135,5 +135,13 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
                 }
             }
         }
+    }
+
+    private fun Int.formatDecimalSeparator(): String {
+        return toString()
+            .reversed()
+            .chunked(3)
+            .joinToString(",")
+            .reversed()
     }
 }

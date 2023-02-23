@@ -24,22 +24,6 @@ import com.example.majika.room.CartDatabase
 import com.example.majika.ui.shoppingCart.ShoppingCartViewModel
 import com.example.majika.ui.shoppingCart.ShoppingCartViewModelFactory
 
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            // Do nothing
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            // Do nothing
-        }
-
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
-        }
-    })
-}
-
 class FoodBankFragment : Fragment(), SensorEventListener {
     private lateinit var mSensorManager: SensorManager
     private lateinit var mTempSensor: Sensor
@@ -126,5 +110,21 @@ class FoodBankFragment : Fragment(), SensorEventListener {
 
         val temp = ArrayList(data.filter { it.name.contains(query, ignoreCase = true) })
         menuAdapter.showData(temp, cartViewModel)
+    }
+
+    private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+        this.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Do nothing
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+                afterTextChanged.invoke(editable.toString())
+            }
+        })
     }
 }
