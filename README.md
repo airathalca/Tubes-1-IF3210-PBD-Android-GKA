@@ -44,7 +44,7 @@ Pada proses pengerjaannya, kami menggunakan beberapa library yang dapat membantu
 
 ### Menu makanan
 
-![](screenshots/20230224111157.png)
+![](screenshots/20230224114713.png)  
 
 ![](screenshots/20230224111259.png)
 
