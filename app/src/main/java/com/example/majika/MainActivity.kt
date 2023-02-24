@@ -1,9 +1,12 @@
 package com.example.majika
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.majika.databinding.ActivityMainBinding
 import com.example.majika.ui.navbar.NavBarFragment
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,5 +20,15 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.placeholderNavBar, fragment)
             .commit()
+
+        KeyboardVisibilityEvent.setEventListener(
+            this
+        ) {
+            if (it) {
+                binding.placeholderNavBar.visibility = View.GONE
+            } else {
+                binding.placeholderNavBar.visibility = View.VISIBLE
+            }
+        }
     }
 }
