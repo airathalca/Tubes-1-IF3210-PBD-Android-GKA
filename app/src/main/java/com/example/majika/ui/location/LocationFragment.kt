@@ -36,7 +36,7 @@ class LocationFragment : Fragment() {
         val locationViewModel =
             ViewModelProvider(this, viewModelFactory)[LocationViewModel::class.java]
         locationViewModel.getBranches()
-        locationViewModel.branchRes.observe(viewLifecycleOwner, Observer { response ->
+        locationViewModel.branchRes.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
                 response.body()?.data.let {
                     if (it != null) {
@@ -44,7 +44,7 @@ class LocationFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
 
         _binding = FragmentLocationBinding.inflate(inflater, container, false)
         val root: View = binding.root

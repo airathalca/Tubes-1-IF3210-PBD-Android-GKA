@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,6 +69,25 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
         val repository = Repository()
         val viewModelFactory = PaymentViewModelFactory(repository)
         paymentViewModel = ViewModelProvider(this, viewModelFactory)[PaymentViewModel::class.java]
+        paymentViewModel.paymentRes.observe(viewLifecycleOwner) { response ->
+            val body = response.body()
+            if (body?.status == "SUCCESS") {
+                Toast.makeText(requireContext(), "Redirecting . . .", Toast.LENGTH_LONG).show()
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    cartViewModel.deleteAllCart()
+
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                }, 3500)
+            } else {
+                Toast.makeText(requireContext(), "Please try again!", Toast.LENGTH_SHORT).show()
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    mScannerView.resumeCameraPreview(this)
+                }, 2000)
+            }
+        }
 
         return binding.root
     }
@@ -109,34 +127,7 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
     }
 
     override fun handleResult(rawResult: Result) {
-        mScannerView.stopCameraPreview()
-
         paymentViewModel.doPayment(rawResult.text)
-        paymentViewModel.paymentRes.observe(viewLifecycleOwner) { response ->
-            val body = response.body()
-            if (body?.status == "SUCCESS") {
-                body.status.let {
-                    Toast.makeText(requireContext(), "Redirecting . . .", Toast.LENGTH_LONG).show()
-                    Log.i("Result", it)
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        cartViewModel.deleteAllCart()
-
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
-                    }, 5000)
-                }
-            } else {
-                body?.status.let {
-                    Toast.makeText(requireContext(), "Please try again!", Toast.LENGTH_SHORT).show()
-                    Log.i("Result", it!!)
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        mScannerView.resumeCameraPreview(this)
-                    }, 2000)
-                }
-            }
-        }
     }
 
     private fun Int.formatDecimalSeparator(): String {
