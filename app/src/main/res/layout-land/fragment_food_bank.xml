@@ -75,8 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="flagNoExtractUi"
-                android:hint="@string/search_menu"
-                android:textColorHint="@color/black" />
+                android:hint="@string/search_menu" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
