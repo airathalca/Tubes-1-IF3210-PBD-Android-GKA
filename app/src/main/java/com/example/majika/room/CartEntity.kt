@@ -5,10 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.majika.models.Menu
 
-@Entity(tableName = "cart")
+@Entity(tableName = "cart", primaryKeys = ["item", "price"])
 data class CartEntity (
 
-    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "item")
     var item: String = "",
 
