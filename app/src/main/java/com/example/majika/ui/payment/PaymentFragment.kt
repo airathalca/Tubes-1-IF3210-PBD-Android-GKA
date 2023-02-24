@@ -109,29 +109,31 @@ class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
     }
 
     override fun handleResult(rawResult: Result) {
+        mScannerView.stopCameraPreview()
+
         paymentViewModel.doPayment(rawResult.text)
         paymentViewModel.paymentRes.observe(viewLifecycleOwner) { response ->
             val body = response.body()
             if (body?.status == "SUCCESS") {
-                body?.status.let {
-                    Log.d("Payment", body?.status!!)
-                    text_view_qr_code_value.text = "Payment Success"
-                    Toast.makeText(requireContext(), "Redirecting..", Toast.LENGTH_SHORT).show()
+                body.status.let {
+                    Toast.makeText(requireContext(), "Redirecting . . .", Toast.LENGTH_LONG).show()
+                    Log.i("Result", it)
 
                     Handler(Looper.getMainLooper()).postDelayed({
                         cartViewModel.deleteAllCart()
 
                         val intent = Intent(requireContext(), MainActivity::class.java)
                         startActivity(intent)
-                    }, 2000)
+                    }, 5000)
                 }
             } else {
-                val body = response.body()
                 body?.status.let {
-                    Log.d("Payment", body?.status!!)
-                    text_view_qr_code_value.text = "Payment failed"
-                    Toast.makeText(requireContext(), "Please try again", Toast.LENGTH_SHORT).show()
-                    mScannerView.resumeCameraPreview(this)
+                    Toast.makeText(requireContext(), "Please try again!", Toast.LENGTH_SHORT).show()
+                    Log.i("Result", it!!)
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        mScannerView.resumeCameraPreview(this)
+                    }, 2000)
                 }
             }
         }

@@ -18,4 +18,5 @@
     <string name="payment_fragment">payment_fragment</string>
     <string name="capture">Capture</string>
     <string name="search_menu">Search Menu</string>
+    <string name="default_temperature">20°C</string>
 </resources>

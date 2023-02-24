@@ -23,6 +23,7 @@ import com.example.majika.repository.Repository
 import com.example.majika.room.CartDatabase
 import com.example.majika.ui.shoppingCart.ShoppingCartViewModel
 import com.example.majika.ui.shoppingCart.ShoppingCartViewModelFactory
+import kotlinx.android.synthetic.main.fragment_food_bank.view.*
 
 class FoodBankFragment : Fragment(), SensorEventListener {
     private lateinit var mSensorManager: SensorManager
@@ -90,7 +91,7 @@ class FoodBankFragment : Fragment(), SensorEventListener {
 
     override fun onSensorChanged(p0: SensorEvent) {
         if (p0.sensor.type == Sensor.TYPE_AMBIENT_TEMPERATURE) {
-            activity?.findViewById<TextView>(R.id.text_temperature)?.text = String.format("%d°C", p0.values[0].toInt())
+            binding.header.text_temperature.text = String.format("%d°C", p0.values[0].toInt())
         }
     }
 
