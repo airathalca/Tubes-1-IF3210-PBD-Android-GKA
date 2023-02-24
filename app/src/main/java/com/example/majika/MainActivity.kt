@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.majika.databinding.ActivityMainBinding
 import com.example.majika.ui.navbar.NavBarFragment
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

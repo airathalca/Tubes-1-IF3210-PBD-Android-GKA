@@ -12,7 +12,6 @@ abstract class CartDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: CartDatabase? = null
-
         fun getDatabase(context: Context): CartDatabase {
             synchronized(this) {
                 var instance = INSTANCE
