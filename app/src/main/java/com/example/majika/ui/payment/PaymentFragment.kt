@@ -26,8 +26,8 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 
 class PaymentFragment : Fragment(), ZXingScannerView.ResultHandler {
     private lateinit var mScannerView: ZXingScannerView
-    private lateinit var paymentViewModel: PaymentViewModel
     private lateinit var cartViewModel: ShoppingCartViewModel
+    private lateinit var paymentViewModel: PaymentViewModel
 
     private var _binding: FragmentPaymentBinding? = null
     private val binding get() = _binding!!

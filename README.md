@@ -78,8 +78,12 @@ Pada proses pengerjaannya, kami menggunakan beberapa library yang dapat membantu
 
 ## Pembagian kerja anggota kelompok
 
-- 13520016 - Gagas Praharsa Bahar - Twibbon, pembayaran, splash screen
-- 13520065 - Rayhan Kinan Muhannad - Pembayaran, responsive and search, fixing keranjang
-- 13520101 - Aira Thalca Avila Putra - Navbar, Daftar makanan dan minuman, keranjang, dan cabang restoran
+- 13520016 - Gagas Praharsa Bahar: Twibbon, pembayaran, splash screen
+- 13520065 - Rayhan Kinan Muhannad: Pembayaran, responsive and search, fixing keranjang
+- 13520101 - Aira Thalca Avila Putra: Navbar, Daftar makanan dan minuman, keranjang, dan cabang restoran
 
 ## Jumlah jam persiapan dan pengerjaan
+
+- 13520016 - Gagas Praharsa Bahar: 12 jam persiapan dan 24 jam pengerjaan
+- 13520065 - Rayhan Kinan Muhannad: 12 jam persiapan dan 24 jam pengerjaan
+- 13520101 - Aira Thalca Avila Putra: 24 jam persiapan dan 48 jam pengerjaan
