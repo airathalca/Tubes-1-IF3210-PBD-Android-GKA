@@ -49,7 +49,7 @@ class MenuAdapter: RecyclerView.Adapter<MenuAdapter.Holder>(){
         holder.view.menu_desc.text = menuList[position].description
         viewModel.listCart.observeForever {
             for (i in it) {
-                if (i.item == menuList[position].name) {
+                if (i.item == menuList[position].name && i.price == menuList[position].price) {
                     holder.view.quantity.text = i.quantity.toString()
                     holder.view.quantity.visibility = View.VISIBLE
                     holder.view.btn_minus.visibility = View.VISIBLE

@@ -28,15 +28,12 @@ class FoodBankFragment : Fragment(), SensorEventListener {
     private lateinit var mSensorManager: SensorManager
     private lateinit var mTempSensor: Sensor
     private lateinit var data: ArrayList<Menu>
-
-    private val menuAdapter by lazy { MenuAdapter() }
     private var _binding: FragmentFoodBankBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.menuList.layoutManager = LinearLayoutManager(context)
-        binding.menuList.adapter = menuAdapter
     }
 
     override fun onCreateView(
@@ -60,10 +57,10 @@ class FoodBankFragment : Fragment(), SensorEventListener {
             if (response.isSuccessful) {
                 response.body()?.data.let { it ->
                     if (it != null) {
-                        // sort by type
                         it.sortByDescending { it.type }
+                        val menuAdapter = MenuAdapter()
                         menuAdapter.showData(it, cartViewModel)
-
+                        binding.menuList.adapter = menuAdapter
                         // save it to data
                         data = it
                     }
@@ -81,7 +78,7 @@ class FoodBankFragment : Fragment(), SensorEventListener {
             binding.textTemperature.text = "0°C"
         }
 
-        binding.searchLayout.editText?.afterTextChanged { updateData(it) }
+        binding.searchLayout.editText?.afterTextChanged { updateData(it, cartViewModel) }
 
         return binding.root
     }
@@ -101,15 +98,11 @@ class FoodBankFragment : Fragment(), SensorEventListener {
         // Do nothing
     }
 
-    private fun updateData(query: String) {
-        val cartDatabase = CartDatabase.getDatabase(requireContext())
-        val cartRepository = CartRepository(cartDatabase)
-        val cartModelFactory = ShoppingCartViewModelFactory(cartRepository)
-        val cartViewModel =
-            ViewModelProvider(this, cartModelFactory)[ShoppingCartViewModel::class.java]
-
+    private fun updateData(query: String, cartViewModel: ShoppingCartViewModel) {
         val temp = ArrayList(data.filter { it.name.contains(query, ignoreCase = true) })
+        val menuAdapter = MenuAdapter()
         menuAdapter.showData(temp, cartViewModel)
+        binding.menuList.adapter = menuAdapter
     }
 
     private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
